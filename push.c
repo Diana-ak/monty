@@ -20,13 +20,6 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	node = malloc(sizeof(stack_t));
-	if (node == NULL)
-	{
-		printf("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-
 	node->n = atoi(num);
 	node->prev = NULL;
 	node->next = *stack;
