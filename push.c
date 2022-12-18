@@ -1,30 +1,45 @@
 #include "monty.h"
 
 /**
- * push - pushes new node to the end of the stack
- * @stack: double pointer to the head of the stack
- * @line_number: the number of a line of the file
+ *f_push - pushes new node to the end of the stack
+ * @head: pointer to the head of the stack
+ * @counter: the number of a line of the file
  *
  * Return: void
  */
-void push(stack_t **stack, unsigned int line_number)
+void f_push(stack_t **head, unsigned int counter)
 {
-	stack_t *node;
-	char *num;
+	int n, j = 0, flag = 0;
 
-	num = strtok(NULL, DELIMS);
-
-	if (num == NULL)
+	if (bus.arg)
 	{
-		printf("L%u: usage: push integer\n", line_number);
+		if (bus.arg[0] == '-')
+			j++;
+		for (; bus.arg[j] != '\0'; j++)
+		{
+			if (bus.arg[j] > 57 || bus.arg[j] < 48)
+				flag = 1;
+		}
+		if (flag == 1)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", counter);
+			fclose(bus.file);
+			free(bus.content);
+			free_stack(*head);
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-
-	node->n = atoi(num);
-	node->prev = NULL;
-	node->next = *stack;
-
-	if (*stack != NULL)
-		(*stack)->prev = node;
-	*stack = node;
+	n = atoi(bus.arg);
+	if (bus.lifi == 0)
+		addnode(head, n);
+	else
+		addqueue(head, n);
 }
