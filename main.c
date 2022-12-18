@@ -5,7 +5,7 @@ bus_t bus = {NULL, NULL, NULL, 0};
  * @argc: how many arguments were passed to a program
  * @argv: arguments vector
  *
- * Return: on scuccess, always EXIT_SUCCESS
+ * Return: on scuccess
  */
 int main(int argc, char *argv[])
 {
@@ -42,5 +42,5 @@ int main(int argc, char *argv[])
 	}
 	free_stack(stack);
 	fclose(file);
-	return (0);
+return (0);
 }
